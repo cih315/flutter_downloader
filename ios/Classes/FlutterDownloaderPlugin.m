@@ -249,6 +249,7 @@ static NSMutableDictionary<NSString*, NSMutableDictionary*> *_runningTaskById = 
     }];
 }
 
+
 - (void)cancelTaskWithId: (NSString*)taskId
 {
     if (debug) {
@@ -1000,8 +1001,9 @@ static NSMutableDictionary<NSString*, NSMutableDictionary*> *_runningTaskById = 
         }
     } else {
         NSString *taskId = [self identifierForTask:downloadTask];
-        int progress = round(totalBytesWritten * 100 / (double)totalBytesExpectedToWrite);
-        NSNumber *lastProgress = _runningTaskById[taskId][KEY_PROGRESS];
+        //int progress = round(totalBytesWritten * 100 / (double)totalBytesExpectedToWrite);
+        int progress = totalBytesWritten;
+	NSNumber *lastProgress = _runningTaskById[taskId][KEY_PROGRESS];
         if (([lastProgress intValue] == 0 || (progress > ([lastProgress intValue] + _step)) || progress == 100) && progress != [lastProgress intValue]) {
             
             NSNumber *status;
